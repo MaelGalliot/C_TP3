@@ -3,7 +3,7 @@
 // Paramètres : 1 automate et 1 mot
 // Renvoie 1 si le mot est reconnu par l'automate
 // Renvoie 0 si le mot n'est pas reconnu par l'automate
-int accepte(struct automate * pautomate, char * mot, int taille_mot)
+int accepte(struct automate * pautomate, char * mot)
 {
 	// On va utiliser la fonction transiter(struct graphe * pgraphe, int etat, int symbole)
 	// Qui renvoie l'état d'arrivée, ou -1 si la transition n'existe pas
@@ -14,13 +14,22 @@ int accepte(struct automate * pautomate, char * mot, int taille_mot)
 
 	int i=0;
 	
-	while((i<taille_mot) && (x != -1))
+	while((mot[i]!='/o') && (x != -1))
 	{
 		x = transiter(pautomate->graphe_trans, x, mot[i]);
 		i++;
 	}
 
 	// Il faut que l'on soit dans un état final pour que le mot soit reconnu par l'AFD
+	int j = 0;
+	while((j<(int)(sizeof(pautomate->etats_finaux)/ sizeof(int))) && (a == 0))
+	{
+		if (x == etats_finaux[j])
+		{
+			a = 1;
+		}
+		j++;
+	}
 
 	return a;
 }
