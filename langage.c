@@ -9,11 +9,10 @@ int accepte(struct automate * pautomate, char * mot)
 	// Qui renvoie l'état d'arrivée, ou -1 si la transition n'existe pas
 
 	int a = 0;
-
 	int x = transiter(pautomate->graphe_trans, pautomate->etat_init, mot[0]);
-
 	int i=0;
 	
+	// On regarde s'il est possible de former le mot en suivant des arcs du graphe
 	while((mot[i]!='/o') && (x != -1))
 	{
 		x = transiter(pautomate->graphe_trans, x, mot[i]);
@@ -30,7 +29,6 @@ int accepte(struct automate * pautomate, char * mot)
 		}
 		j++;
 	}
-
 	return a;
 }
 
@@ -38,7 +36,7 @@ int accepte(struct automate * pautomate, char * mot)
 // Par ordre de longueur jusque maxlongueur (passé en paramètre)
 void affiche_langage_taille_croissante(struct automate * pautomate, int maxlongueur)
 {
-
+	
 }
 
 // Trie alphabétiquement la liste d'adjacence en fonction des étiquettes
