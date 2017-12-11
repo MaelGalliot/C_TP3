@@ -10,7 +10,9 @@ int accepte(struct automate * pautomate, char * mot)
 	return x;
 }
 
-affiche_langage_taille_croissante()
+// Affiche les mots reconnus par l'automate 
+// Par ordre de longueur juste maxlongueur (passé en paramètre)
+void affiche_langage_taille_croissante(struct automate * pautomate, int maxlongueur)
 {
-	
+
 }
