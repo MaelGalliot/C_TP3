@@ -11,8 +11,27 @@ int accepte(struct automate * pautomate, char * mot)
 }
 
 // Affiche les mots reconnus par l'automate 
-// Par ordre de longueur juste maxlongueur (passé en paramètre)
+// Par ordre de longueur jusque maxlongueur (passé en paramètre)
 void affiche_langage_taille_croissante(struct automate * pautomate, int maxlongueur)
+{
+
+}
+
+// Trie alphabétiquement la liste d'adjacence en fonction des étiquettes
+void trier_liste(struct larc ** lsite_adjs)
+{
+
+}
+
+// Trie alphabétiquement toutes les listes d'adjacence d'un graphe
+void trier_listes(struct graphe * pgraphe)
+{
+
+}
+
+// Affiche les mots reconnus par l'automate
+// Par ordre alphabétique jusque maxlongueur
+void affiche_langage_alphabetique()
 {
 
 }
