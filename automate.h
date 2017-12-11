@@ -3,6 +3,10 @@
 
 #include "graphe.h"
 
+struct automate * creer_automate (int *, char *, int, int *);
+void liberer_automate (struct automate *);
+void ajouter_transition (int, int, char);
+
 struct automate
 {
 	struct graphe * graphe_trans; // Graphe de transition de l'AFD
