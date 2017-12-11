@@ -104,8 +104,6 @@ void retirer_arc (struct graphe * pgraphe, int s1, int s2, char symbole)
 		}
 	}
 	else
-
-		printf("L'arc à retirer n'existe pas.\n");
 }
 
 // Paramètres : état de départ et étiquette
@@ -115,7 +113,6 @@ int transiter(struct graphe * pgraphe, int etat, int symbole)
 {
 	int etat_atteint = -1;
     if(etat>pgraphe->nbsommets)
-        printf("Ce sommet n'existe pas\n");
     else
     {
         struct larc * piteration = pgraphe->adjs[etat];
@@ -129,7 +126,6 @@ int transiter(struct graphe * pgraphe, int etat, int symbole)
                 break;
         }
         if(piteration==NULL)
-            printf("Il n'y a pas d'arc pour ce sommet\n");
         else
         {
            if(piteration->etiquette == symbole)
