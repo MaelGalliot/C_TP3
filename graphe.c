@@ -181,6 +181,7 @@ void liberer_graphe(struct graphe * pgraphe)
 	printf("Graphe détruit\n");
 }
 
+/*
 void Menu(struct graphe * pgraphe)
 {
 	int choixMenu=-1,sommet1,sommet2,tailleGraphe,i=0,etat_depart;
@@ -258,3 +259,4 @@ int Verification (struct graphe * pgraphe, int s1, int s2)
 	}
 	return ok;
 }
+*/

@@ -26,7 +26,7 @@ void liberer_automate (struct automate * pautomate)
 // Ajoute la transition (e1,v) = e2 
 // Vérifie que e1 et e2 existent, que v appartient à l'alphabet, 
 // qu'il n'y a pas déjà de transition de e1 vers e2
-void ajouter_transition (int e1, int e2, char v)
+void ajouter_transition (struct automate * pautomate, int e1, int e2, char v)
 {
 	ajouter_arc(pautomate->graphe_trans, e1, e2, v);
 }

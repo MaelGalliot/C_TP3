@@ -6,14 +6,14 @@
 
 struct graphe * creer_graphe (int);
 void ajouter_arc (struct graphe *, int, int, char);
-int arc_existe (struct graphe *, int, int);
-void retirer_arc (struct graphe *, int, int);
+int arc_existe (struct graphe *, int, int, char);
+void retirer_arc (struct graphe *, int, int, char);
 void afficher(struct graphe *);
-int transiter (struct graphe *, int, int);
+int transiter(struct graphe *, int, int);
 void liberer_graphe(struct graphe *);
 
-void Menu(struct graphe *);
-int Verification (struct graphe *, int, int);
+// void Menu(struct graphe *);
+// int Verification (struct graphe *, int, int);
 
 struct larc
 {
