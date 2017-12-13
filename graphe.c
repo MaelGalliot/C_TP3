@@ -110,7 +110,7 @@ void retirer_arc (struct graphe * pgraphe, int s1, int s2, char symbole)
 // Paramètres : état de départ et étiquette
 // Renvoie l'état d'arrivée 
 // Renvoie -1 si la transition n'existe pas
-int transiter(struct graphe * pgraphe, int etat, int symbole)
+int transiter(struct graphe * pgraphe, int etat, char symbole)
 {
 	int etat_atteint = -1;
     if(etat<=pgraphe->nbsommets)
