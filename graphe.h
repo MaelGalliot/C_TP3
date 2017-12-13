@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 struct graphe * creer_graphe (int);
 void ajouter_arc (struct graphe *, int, int, char);

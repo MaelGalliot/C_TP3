@@ -4,5 +4,6 @@
 
 int main(void)
 {
+	printf("èéàç\n");
 	return 0;
 }

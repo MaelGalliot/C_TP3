@@ -1,35 +1,28 @@
 #include "automate.h"
 
+void trier_liste(struct larc **);
+void trier_listes(struct graphe *);
+
 // Paramètres : 1 automate et 1 mot
 // Renvoie 1 si le mot est reconnu par l'automate
 // Renvoie 0 si le mot n'est pas reconnu par l'automate
-int accepte(struct automate * pautomate, char * mot)
+int accepte(struct automate * pautomate, const char * mot)
 {
 	// On va utiliser la fonction transiter(struct graphe * pgraphe, int etat, int symbole)
 	// Qui renvoie l'état d'arrivée, ou -1 si la transition n'existe pas
 
-	int a = 0;
-	int x = transiter(pautomate->graphe_trans, pautomate->etat_init, mot[0]);
-	int i=0;
-	
-	// On regarde s'il est possible de former le mot en suivant des arcs du graphe
-	while((mot[i]!='/o') && (x != -1))
+	int e = pautomate->etat_init; // Mémoire de l'état
+	// int i = 0; // Compteur
+
+	// On regarde si l'étiquette appartient à l'alphabet
+	// for (i = 0; (mot[i] != '\0') && (e != -1); ++i)
+	for (; *mot != '\0' && e != -1; ++mot)
 	{
-		x = transiter(pautomate->graphe_trans, x, mot[i]);
-		i++;
+		e = transiter(pautomate->graphe_trans, e, mot[i]);
 	}
 
-	// Il faut que l'on soit dans un état final pour que le mot soit reconnu par l'AFD
-	int j = 0;
-	while((j<(int)(sizeof(pautomate->etats_finaux)/ sizeof(int))) && (a == 0))
-	{
-		if (x == etats_finaux[j])
-		{
-			a = 1;
-		}
-		j++;
-	}
-	return a;
+	// La case -1 correspond à 0
+	return pautomate->etats_finaux[e];
 }
 
 // Affiche les mots reconnus par l'automate 

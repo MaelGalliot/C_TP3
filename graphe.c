@@ -1,33 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <wchar.h>
+
 #include "graphe.h"
 
-// Initialise une structure graphe contenant un nombre de sommets passÈ en paramËtre et aucun arc
-// Renvoie l'adresse mÈmoire ddu graphe allouÈe
+// Initialise une structure graphe contenant un nombre de sommets pass√© en param√®tre et aucun arc
+// Renvoie l'adresse m√©moire ddu graphe allou√©e
 struct graphe * creer_graphe (int nbsommets)
 {
 	struct graphe * pgraphe;
 	pgraphe = malloc(sizeof(struct graphe)); 
 	pgraphe->nbsommets = nbsommets;
-	pgraphe->adjs = malloc(sizeof(struct larc *)*nbsommets); // Alloue la mÈmoire pour le tableau de listes d'adjacence
+	pgraphe->adjs = malloc(sizeof(struct larc *)*nbsommets); // Alloue la m√©moire pour le tableau de listes d'adjacence
 
 	int i = 0;
-	for(i=0; i<nbsommets;i++)
+	for(i=0; i<nbsommets;++i)
 	{
 		pgraphe->adjs[i]=NULL;
 	}
 
-	return pgraphe; // Adresse mÈmoire du graphe crÈÈ
+	return pgraphe; // Adresse m√©moire du graphe cr√©√©
 }
 
-// ParamËtres : 2 sommets et une Ètiquette associÈe
-// Renvoie 1 si cet arc existe dÈj‡
+// Param√®tres : 2 sommets et une √©tiquette associ√©e
+// Renvoie 1 si cet arc existe d√©j√†
 // Renvoie 0 si l'arc n'existe pas
 int arc_existe (struct graphe * pgraphe, int s1, int s2, char symbole)
 {
 	int existence = 0;
 
-	struct larc * piteration = pgraphe->adjs[s1]; // On recupËre le pointeur du sommet s1 sur la liste chainÈe
+	struct larc * piteration = pgraphe->adjs[s1]; // On recup√®re le pointeur du sommet s1 sur la liste chain√©e
 	if(pgraphe->adjs[s1] != NULL)
 	{
 
@@ -36,9 +38,9 @@ int arc_existe (struct graphe * pgraphe, int s1, int s2, char symbole)
         	if ((piteration->voisin == s2) && (piteration->etiquette == symbole))
             {
                 existence = 1;
-                piteration=NULL;//On termine la boucle l'arc existe dÈj‡
+                piteration=NULL;//On termine la boucle l'arc existe d√©j√†
             }
-            else //L'arc actuel ne relie pas le s1 avec le s2 on passe ‡ celui d'aprËs
+            else //L'arc actuel ne relie pas le s1 avec le s2 on passe √† celui d'apr√®s
             {
                 piteration = piteration->arc_suiv;
             }
@@ -48,11 +50,11 @@ int arc_existe (struct graphe * pgraphe, int s1, int s2, char symbole)
 	return existence; // 0 ou 1 en fonction de l'existence de l'arc
 }
 
-// Ajoute un arc entre deux sommets passÈs en paramËtre
-// Assigne un symbole aussi passÈ en paramËtre
+// Ajoute un arc entre deux sommets pass√©s en param√®tre
+// Assigne un symbole aussi pass√© en param√®tre
 void ajouter_arc (struct graphe * pgraphe, int s1, int s2, char symbole)
 {	
-	if (arc_existe(pgraphe, s1, s2, symbole) == 0) // Si un arc avec ces paramËtres n'existe pas encore
+	if (arc_existe(pgraphe, s1, s2, symbole) == 0) // Si un arc avec ces param√®tres n'existe pas encore
 	{
 		struct larc * parc;
 		parc = malloc(sizeof(struct larc));
@@ -63,23 +65,23 @@ void ajouter_arc (struct graphe * pgraphe, int s1, int s2, char symbole)
 		pgraphe->adjs[s1] = parc;
 	}
 
-	else // Si un arc avec ces paramËtres existe dÈj‡
+	else // Si un arc avec ces param√®tres existe d√©j√†
 	{
-		printf("L'arc existe dÈj‡.\n");
+		printf("L'arc existe d√©j√†.\n");
 	}
 }
 
-// ParamËtres : 2 sommets et une Ètiquette associÈe
-// Supprime l'arc associÈ ‡ ces paramËtres si celui-ci existe
+// Param√®tres : 2 sommets et une √©tiquette associ√©e
+// Supprime l'arc associ√© √† ces param√®tres si celui-ci existe
 void retirer_arc (struct graphe * pgraphe, int s1, int s2, char symbole)
 {
 	if(arc_existe(pgraphe,s1,s2,symbole) == 1)
 	{
-		if ((pgraphe->adjs[s1]->etiquette == symbole) && (pgraphe->adjs[s1]->voisin == s2)) // Si le premier arc de la chaÓne match
+		if ((pgraphe->adjs[s1]->etiquette == symbole) && (pgraphe->adjs[s1]->voisin == s2)) // Si le premier arc de la cha√Æne match
 		{
-			struct larc * pmemoire = pgraphe->adjs[s1]; // Garde en mÈmoire l'adresse de l'arc ‡ supprimer (1er), pour free plus tard
+			struct larc * pmemoire = pgraphe->adjs[s1]; // Garde en m√©moire l'adresse de l'arc √† supprimer (1er), pour free plus tard
 			pgraphe->adjs[s1] = pgraphe->adjs[s1]->arc_suiv; // pgraphe->adjs[s1]pointe maintenant directement sur l'arc suivant (2e devenu 1er)
-			free(pmemoire); // LibËre la mÈmoire de l'arc supprimÈ
+			free(pmemoire); // Lib√®re la m√©moire de l'arc supprim√©
 		}
 
 		else
@@ -92,10 +94,10 @@ void retirer_arc (struct graphe * pgraphe, int s1, int s2, char symbole)
 				if (pactuel->voisin == s2 && pactuel->etiquette == symbole)
 				{
 					pprecedent->arc_suiv = pactuel->arc_suiv; // arc-1 pointe sur arc +1
-					printf("On a supprimÈ l'arc de %d ‡ %d d'Ètiquette %c.\n", s1, s2, symbole);
+					printf("On a supprim√© l'arc de %d √† %d d'√©tiquette %c.\n", s1, s2, symbole);
 					free(pactuel); // free arc (qui a match)
 				}
-				else // ItÈration suivante
+				else // It√©ration suivante
 				{
 					pprecedent = pactuel; 
 					pactuel = pactuel->arc_suiv; 
@@ -105,8 +107,8 @@ void retirer_arc (struct graphe * pgraphe, int s1, int s2, char symbole)
 	}
 }
 
-// ParamËtres : Ètat de dÈpart et Ètiquette
-// Renvoie l'Ètat d'arrivÈe 
+// Param√®tres : √©tat de d√©part et √©tiquette
+// Renvoie l'√©tat d'arriv√©e 
 // Renvoie -1 si la transition n'existe pas
 int transiter(struct graphe * pgraphe, int etat, int symbole)
 {
@@ -114,7 +116,7 @@ int transiter(struct graphe * pgraphe, int etat, int symbole)
     if(etat<=pgraphe->nbsommets)
     {
         struct larc * piteration = pgraphe->adjs[etat];
-        while (piteration != NULL) // Tant que l'Ètiquette n'est pas la bonne
+        while (piteration != NULL) // Tant que l'√©tiquette n'est pas la bonne
         {
             if(piteration->etiquette != symbole)
             {
@@ -131,15 +133,15 @@ int transiter(struct graphe * pgraphe, int etat, int symbole)
             }
         }
     }
-	return etat_atteint; // Etat d'arrivÈe ou -1 si celui-ci n'existe pas
+	return etat_atteint; // Etat d'arriv√©e ou -1 si celui-ci n'existe pas
 }
 
-// Affiche le graphe en listant pour chaque sommet les sommets accessibles et les Ètiquettes associÈees
+// Affiche le graphe en listant pour chaque sommet les sommets accessibles et les √©tiquettes associ√©ees
 void afficher(struct graphe * pgraphe)
 {
 	printf("\n");
 	int i = 0;
-	for (i=0; i < pgraphe->nbsommets; i++)
+	for (i=0; i < pgraphe->nbsommets; ++i)
 	{
 		printf("Sommet %d : \n", i);
 
@@ -152,26 +154,26 @@ void afficher(struct graphe * pgraphe)
 	}
 }
 
-// LibËre l'espace mÈmoire occupÈ par le graphe
+// Lib√®re l'espace m√©moire occup√© par le graphe
 void liberer_graphe(struct graphe * pgraphe)
 {
 	int i;
 	struct larc * pactuel = NULL; // Pointeur sur arc
 	struct larc * pprecedent = NULL;  // Pointeur sur arc-1
 
-	//Libere la mÈmoire des arcs
+	//Libere la m√©moire des arcs
 	for (i = 0; i < pgraphe->nbsommets; i++) // Pour le nombre de sommet
 	{
 		pactuel = pgraphe->adjs[i];
 		while (pactuel != NULL)
 		{
-			pprecedent = pactuel; // On garde en mÈmoire le pointeur actuel
+			pprecedent = pactuel; // On garde en m√©moire le pointeur actuel
 			pactuel = pactuel->arc_suiv; // On passe au pointeur suivant
 			free(pprecedent); // On free l'ancien arc
 		}
 	}
-	free(pgraphe); // LibËre la structure graphe
-	printf("Graphe dÈtruit\n");
+	free(pgraphe); // Lib√®re la structure graphe
+	printf("Graphe d√©truit\n");
 }
 
 /*
