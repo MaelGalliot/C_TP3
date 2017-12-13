@@ -11,6 +11,7 @@ struct automate * creer_automate (int nbetats, const char * alphabet, int etat_i
 	pautomate->graphe_trans = creer_graphe(nbetats);
 
 	pautomate->alphabet = malloc(sizeof(alphabet));
+	// Ou malloc(strlen(alphabet)*sizeof(char));
 	strcpy(alphabet, pautomate->alphabet);
 
 	pautomate->etat_init = etat_init;

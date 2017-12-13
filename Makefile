@@ -9,6 +9,9 @@ graphe.o : graphe.c graphe.h
 
 automate.o : automate.c automate.h
 	gcc -c automate.c -o automate.o -g -Wall
+
+langage.o : langage.c langage.h
+	gcc -c langage.c -o langage.o -g -Wall
 	
 clean : 
 	rm -f *.o
