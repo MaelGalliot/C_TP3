@@ -4,13 +4,29 @@
 // Paramètres : ensemble d'états, alphabet, état initial, tableau d'états finaux
 // On suppose au départ que l'automate ne contient aucune transition
 // Renvoie l'adresse mémoire de l'automate alloué
-struct automate * creer_automate (int nbetats, char * alphabet, int etat_init, int * etats_finaux)
+struct automate * creer_automate (int nbetats, const char * alphabet, int etat_init, 
+	const int * etats_finaux_parametres, int nbetatsfinaux)
 {
 	struct automate * pautomate = malloc(sizeof(struct automate));
 	pautomate->graphe_trans = creer_graphe(nbetats);
-	pautomate->alphabet = alphabet;
+
+	pautomate->alphabet = malloc(sizeof(alphabet));
+	strcpy(alphabet, pautomate->alphabet);
+
 	pautomate->etat_init = etat_init;
-	pautomate->etats_finaux = etats_finaux;
+
+	pautomate->etats_finaux = calloc(nbetats+1, sizeof(int));
+	pautomate->etats_finaux = pautomate->etats_finaux + 1;
+
+	// Si état final 1
+	// Si état pas final 0
+	int i;
+
+	for (i = 0; i < nbetatsfinaux; ++i)
+	{
+		pautomate->etats_finaux[etats_finaux_parametres[i]] = 1;
+	}
+
 	return pautomate;
 }
 
@@ -18,6 +34,8 @@ struct automate * creer_automate (int nbetats, char * alphabet, int etat_init, i
 void liberer_automate (struct automate * pautomate)
 {
 	liberer_graphe(pautomate->graphe_trans);
+	free(pautomate->alphabet);
+	free(pautomate->etats_finaux-1);
 	free(pautomate);
 	printf("Liberation de l'espace memoire de automate effectue\n");
 }
@@ -28,8 +46,8 @@ int etiquette_existe(struct automate * pautomate, char v)
 {
 	int x = 0;
 	int i = 0;
-	// On regarde si l'étiquette 
-	while((pautomate->alphabet[i] != '/o') && (x == 0))
+	// On regarde si l'étiquette appartient à l'alphabet
+	while((pautomate->alphabet[i] != '\0') && (x == 0))
 	{
 		if (v == pautomate->alphabet[i])
 		{
