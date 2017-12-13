@@ -28,5 +28,5 @@ void liberer_automate (struct automate * pautomate)
 // qu'il n'y a pas déjà de transition de e1 vers e2
 void ajouter_transition (struct automate * pautomate, int e1, int e2, char v)
 {
-	ajouter_arc(pautomate->graphe_trans, e1, e2, v);
+		ajouter_arc(pautomate->graphe_trans, e1, e2, v);
 }

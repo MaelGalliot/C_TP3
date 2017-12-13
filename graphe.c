@@ -103,7 +103,6 @@ void retirer_arc (struct graphe * pgraphe, int s1, int s2, char symbole)
 			}
 		}
 	}
-	else
 }
 
 // Paramètres : état de départ et étiquette
@@ -112,8 +111,7 @@ void retirer_arc (struct graphe * pgraphe, int s1, int s2, char symbole)
 int transiter(struct graphe * pgraphe, int etat, int symbole)
 {
 	int etat_atteint = -1;
-    if(etat>pgraphe->nbsommets)
-    else
+    if(etat<=pgraphe->nbsommets)
     {
         struct larc * piteration = pgraphe->adjs[etat];
         while (piteration != NULL) // Tant que l'étiquette n'est pas la bonne
@@ -125,8 +123,7 @@ int transiter(struct graphe * pgraphe, int etat, int symbole)
             else
                 break;
         }
-        if(piteration==NULL)
-        else
+        if(piteration != NULL)
         {
            if(piteration->etiquette == symbole)
             {
