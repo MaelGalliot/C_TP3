@@ -4,15 +4,14 @@
 // Paramètres : ensemble d'états, alphabet, état initial, tableau d'états finaux
 // On suppose au départ que l'automate ne contient aucune transition
 // Renvoie l'adresse mémoire de l'automate alloué
-struct automate * creer_automate (int nbetats, const char * alphabet, int etat_init, 
-	const int * etats_finaux_parametres, int nbetatsfinaux)
+struct automate * creer_automate(int nbetats, const char * alphabet, int etat_init, const int * etats_finaux_parametres, int nbetatsfinaux)
 {
 	struct automate * pautomate = malloc(sizeof(struct automate));
 	pautomate->graphe_trans = creer_graphe(nbetats);
 
 	pautomate->alphabet = malloc(sizeof(alphabet));
 	// Ou malloc(strlen(alphabet)*sizeof(char));
-	strcpy(alphabet, pautomate->alphabet);
+	strcpy(pautomate->alphabet, alphabet);
 
 	pautomate->etat_init = etat_init;
 
@@ -27,12 +26,12 @@ struct automate * creer_automate (int nbetats, const char * alphabet, int etat_i
 	{
 		pautomate->etats_finaux[etats_finaux_parametres[i]] = 1;
 	}
-
+	
 	return pautomate;
 }
 
 // Libère l'espace mémoire occupé par l'automate 
-void liberer_automate (struct automate * pautomate)
+void liberer_automate(struct automate * pautomate)
 {
 	liberer_graphe(pautomate->graphe_trans);
 	free(pautomate->alphabet);
@@ -63,7 +62,7 @@ int etiquette_existe(struct automate * pautomate, char v)
 // Ajoute la transition (e1,v) = e2 
 // Vérifie que e1 et e2 existent, que v appartient à l'alphabet, 
 // qu'il n'y a pas déjà de transition de e1 vers e2
-void ajouter_transition (struct automate * pautomate, int e1, int e2, char v)
+void ajouter_transition(struct automate * pautomate, int e1, int e2, char v)
 {
 	if ((e1 < pautomate->graphe_trans->nbsommets) && (e2 < pautomate->graphe_trans->nbsommets) && (etiquette_existe(pautomate, v)==1))
 	{

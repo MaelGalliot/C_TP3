@@ -5,12 +5,12 @@
 #include <stdio.h>
 #include <string.h>
 
-struct graphe * creer_graphe (int);
-void ajouter_arc (struct graphe *, int, int, char);
-int arc_existe (struct graphe *, int, int, char);
+struct graphe * creer_graphe(int);
+void ajouter_arc(struct graphe *, int, int, char);
+int arc_existe(struct graphe *, int, int, char);
 void retirer_arc (struct graphe *, int, int, char);
 void afficher(struct graphe *);
-int transiter(struct graphe *, int, int);
+int transiter(struct graphe *, int, char);
 void liberer_graphe(struct graphe *);
 
 // void Menu(struct graphe *);

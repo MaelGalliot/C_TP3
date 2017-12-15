@@ -6,7 +6,7 @@
 
 // Initialise une structure graphe contenant un nombre de sommets passé en paramètre et aucun arc
 // Renvoie l'adresse mémoire ddu graphe allouée
-struct graphe * creer_graphe (int nbsommets)
+struct graphe * creer_graphe(int nbsommets)
 {
 	struct graphe * pgraphe;
 	pgraphe = malloc(sizeof(struct graphe)); 
@@ -25,7 +25,7 @@ struct graphe * creer_graphe (int nbsommets)
 // Paramètres : 2 sommets et une étiquette associée
 // Renvoie 1 si cet arc existe déjà
 // Renvoie 0 si l'arc n'existe pas
-int arc_existe (struct graphe * pgraphe, int s1, int s2, char symbole)
+int arc_existe(struct graphe * pgraphe, int s1, int s2, char symbole)
 {
 	int existence = 0;
 
@@ -52,7 +52,7 @@ int arc_existe (struct graphe * pgraphe, int s1, int s2, char symbole)
 
 // Ajoute un arc entre deux sommets passés en paramètre
 // Assigne un symbole aussi passé en paramètre
-void ajouter_arc (struct graphe * pgraphe, int s1, int s2, char symbole)
+void ajouter_arc(struct graphe * pgraphe, int s1, int s2, char symbole)
 {	
 	if (arc_existe(pgraphe, s1, s2, symbole) == 0) // Si un arc avec ces paramètres n'existe pas encore
 	{
@@ -73,7 +73,7 @@ void ajouter_arc (struct graphe * pgraphe, int s1, int s2, char symbole)
 
 // Paramètres : 2 sommets et une étiquette associée
 // Supprime l'arc associé à ces paramètres si celui-ci existe
-void retirer_arc (struct graphe * pgraphe, int s1, int s2, char symbole)
+void retirer_arc(struct graphe * pgraphe, int s1, int s2, char symbole)
 {
 	if(arc_existe(pgraphe,s1,s2,symbole) == 1)
 	{

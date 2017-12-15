@@ -1,4 +1,6 @@
+#include "graphe.h"
 #include "automate.h"
+#include "langage.h"
 
 void trier_liste(struct larc **);
 void trier_listes(struct graphe *);
