@@ -17,8 +17,9 @@ int accepte(struct automate * pautomate, const char * mot)
 	// int i = 0; // Compteur
 
 	// On regarde si l'étiquette appartient à l'alphabet
-	// for (i = 0; (mot[i] != '\0') && (e != -1); ++i)
-	for (; *mot != '\0' && e != -1; ++mot)
+	int i;
+	for (i = 0; (mot[i] != '\0') && (e != -1); ++i)
+	//for (; *mot != '\0' && e != -1; ++mot)
 	{
 		e = transiter(pautomate->graphe_trans, e, mot[i]);
 	}
