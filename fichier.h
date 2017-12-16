@@ -1,5 +1,5 @@
-#ifndef LANGAGE_H
-#define LANGAGE_H
+#ifndef FICHIER_H
+#define FICHIER_H
 
 #include "graphe.h"
 #include "automate.h"

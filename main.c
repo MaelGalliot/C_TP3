@@ -22,11 +22,19 @@ int main(void)
 
 	afficher(pautomate->graphe_trans);
 
-	char mot[] = "abb";
+	const char mot[] = "abb";
 
 	// Renvoie 1 si le mot est reconnu par l'automate
 	// Renvoie 0 si le mot n'est pas reconnu par l'automate
 	int x = accepte(pautomate, mot);
+	if(x == 0)
+	{
+		printf("Le mot %s n'est pas reconnu par l'automate.\n", mot);
+	}
+	if(x == 1)
+	{
+		printf("Le mot %s est reconnu par l'automate.\n", mot);
+	}
 
 	return 0;
 }

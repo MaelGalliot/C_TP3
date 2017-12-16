@@ -1,4 +1,4 @@
-all : main.o graphe.o automate.o
+all : main.o graphe.o automate.o langage.o
 	gcc $^ -o tp3 -g -Wall
 
 main.o : main.c 

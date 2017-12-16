@@ -8,7 +8,7 @@ void trier_listes(struct graphe *);
 // Paramètres : 1 automate et 1 mot
 // Renvoie 1 si le mot est reconnu par l'automate
 // Renvoie 0 si le mot n'est pas reconnu par l'automate
-int accepte(struct automate * pautomate, const char * mot)
+int accepte(struct automate * pautomate, const char mot[])
 {
 	// On va utiliser la fonction transiter(struct graphe * pgraphe, int etat, int symbole)
 	// Qui renvoie l'état d'arrivée, ou -1 si la transition n'existe pas
