@@ -1,40 +1,47 @@
 #include "graphe.h"
 #include "automate.h"
 #include "langage.h"
+#include "fichier.h"
 
 int main(void)
 {
-	int nbetats = 4;
-	char alphabet[] = {'a','b', '\0'};
-	int etat_init = 0;
-	int etats_finaux_parametres[] = {3};
-	int nbetatsfinaux = 1;
-	struct automate * pautomate = creer_automate(nbetats, alphabet, etat_init, etats_finaux_parametres, nbetatsfinaux);
-	
-	ajouter_transition(pautomate, 0, 0, 'b');
-	ajouter_transition(pautomate, 0, 1, 'a');
-	ajouter_transition(pautomate, 1, 1, 'a');
-	ajouter_transition(pautomate, 1, 2, 'b');
-	ajouter_transition(pautomate, 2, 1, 'a');
-	ajouter_transition(pautomate, 2, 3, 'b');
-	ajouter_transition(pautomate, 3, 1, 'a');
-	ajouter_transition(pautomate, 3, 0, 'b');
+    int taille = 15;
+    char * nomfichier = calloc(taille,sizeof(char));
+    FILE * fichier = NULL;
+    printf("Fichier a lire : ");
+    lecture(nomfichier,taille);
+    printf("Lecture du fichier %s",nomfichier);
+    fichier = fopen(nomfichier, "r+"); // ouverture du fichier en mode lecture
+    if(fichier !=NULL)
+    {
+        struct automate * pautomate = lire_automate(fichier);
+        // Renvoie 1 si le mot est reconnu par l'automate
+        // Renvoie 0 si le mot n'est pas reconnu par l'automate
+        char * alpha = calloc(taille,sizeof(char));
+        printf("Votre mot :");
+        lecture(alpha,taille);
+        if(accepte(pautomate,alpha))
+            printf("Mot accepte");
 
-	afficher(pautomate->graphe_trans);
+        int rep;
+        printf("\nVoulez-vous modifiez l'automate (1 = yes) :");
+        scanf("%d",&rep);
+        if(rep==1)
+           pautomate=ecrire_automate(fichier,pautomate);
+        if(rep==2)
+        {
+            char * nomfichier2 = calloc(taille,sizeof(char));
+            printf("Sauvegarde de l'automate\nNom de fichier :");
+            lecture(nomfichier2,taille); // Permet de lire la chaine de caractère rentrée par l'utilisateur et d'enlevere le \n à la fin
+            sauvegarde_automate(pautomate,nomfichier2);
+        }
 
-	const char mot[] = "abb";
-
-	// Renvoie 1 si le mot est reconnu par l'automate
-	// Renvoie 0 si le mot n'est pas reconnu par l'automate
-	int x = accepte(pautomate, mot);
-	if(x == 0)
-	{
-		printf("Le mot %s n'est pas reconnu par l'automate.\n", mot);
-	}
-	if(x == 1)
-	{
-		printf("Le mot %s est reconnu par l'automate.\n", mot);
-	}
+        fclose(fichier);
+    }
+    else
+    {
+        printf("Impossible d'ouvrir le fichier");
+    }
 
 	return 0;
 }
